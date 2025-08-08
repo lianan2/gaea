@@ -35,6 +35,7 @@ import (
 	"strings"
 
 	"github.com/XiaoMi/Gaea/core/errors"
+	"github.com/XiaoMi/Gaea/log"
 	"github.com/XiaoMi/Gaea/models"
 )
 
@@ -310,6 +311,7 @@ func parseRule(cfg *models.Shard) (*BaseRule, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Notice("解析表%+v, 子表索引%+v", r.table, subTableIndexs)
 
 	r.subTableIndexes = subTableIndexs
 	r.tableToSlice = tableToSlice

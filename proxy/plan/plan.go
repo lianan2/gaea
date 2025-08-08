@@ -19,6 +19,7 @@ import (
 	"math/rand"
 	"strings"
 
+	"github.com/XiaoMi/Gaea/log"
 	"github.com/XiaoMi/Gaea/mysql"
 	"github.com/XiaoMi/Gaea/parser"
 	"github.com/XiaoMi/Gaea/parser/ast"
@@ -558,6 +559,7 @@ func generateShardingSQLs(stmt ast.StmtNode, result *RouteResult, router *router
 
 		ret[sliceName][dbName] = append(ret[sliceName][dbName], sb.String())
 	}
+	log.Notice("生成分片sql--->%+v", ret)
 
 	result.Reset() // must reset the cursor for next call
 

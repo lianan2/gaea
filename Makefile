@@ -1,6 +1,4 @@
 ROOT:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-GOOS ?= linux
-GOARCH ?= $(shell go env GOARCH)
 GOENV  := CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH)
 GO     := $(GOENV) go
 GAEA_OUT:=$(ROOT)/bin/gaea
@@ -55,3 +53,6 @@ integrate_test:
 
 build_with_coverage:
 	go test -c cmd/gaea/main.go cmd/gaea/main_test.go -coverpkg ./... -covermode=count -o bin/gaea
+
+run:
+	./bin/gaea -config etc/gaea.ini

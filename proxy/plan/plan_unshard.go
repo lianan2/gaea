@@ -16,9 +16,10 @@ package plan
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/XiaoMi/Gaea/parser"
 	"github.com/XiaoMi/Gaea/proxy/router"
-	"strings"
 
 	"github.com/XiaoMi/Gaea/mysql"
 	"github.com/XiaoMi/Gaea/parser/ast"
