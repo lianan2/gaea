@@ -1,8 +1,10 @@
 ROOT:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+GOOS    = darwin
+GOARCH  = arm64
 GOENV  := CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH)
 GO     := $(GOENV) go
-GAEA_OUT:=$(ROOT)/bin/gaea
-GAEA_CC_OUT:=$(ROOT)/bin/gaea-cc
+GAEA_OUT:=$(ROOT)/bin/$(GOOS)/$(GOARCH)/gaea
+GAEA_CC_OUT:=$(ROOT)/bin/$(GOOS)/$(GOARCH)/gaea-cc
 PKG:=$(shell go list -m)
 
 .PHONY: all build gaea gaea-cc parser clean test build_with_coverage
@@ -18,6 +20,9 @@ gaea-cc:
 
 parser:
 	cd parser && make && cd ..
+
+run:
+	./bin/$(GOOS)/$(GOARCH)/gaea -config etc/gaea.ini
 
 clean:
 	@rm -rf bin
@@ -53,6 +58,3 @@ integrate_test:
 
 build_with_coverage:
 	go test -c cmd/gaea/main.go cmd/gaea/main_test.go -coverpkg ./... -covermode=count -o bin/gaea
-
-run:
-	./bin/gaea -config etc/gaea.ini
